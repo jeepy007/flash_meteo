@@ -15,6 +15,7 @@ class _HomeState extends State<Home> {
   String NomaAffiche= "?";
   void AfficheVille (){
     setState(() {
+      NomaAffiche=_NomdeVilleControler.text;
      RestCountries(NomaAffiche);
     });
   }
@@ -64,18 +65,21 @@ class _HomeState extends State<Home> {
     ),
     );
   }
-   RestCountries(
+   RestCountries (
    String NomdePays
- ){
+ ) async {
    
    print('On est dans le rest countries');
-   final response = /*await*/ http.get(
-        Uri.parse('https://restcountries.com/v3.1/name/japan' + NomdePays),
+   print("AAAAAAAAAAAAAA");
+   print(NomdePays);
+   final response = await http.get(
+        Uri.parse('https://restcountries.com/v3.1/name/' + NomdePays),
         //body: {
          // "username": user.username,
          // "password": user.password,
       //  });
    );
+   print(response.body);
    }
 }
 
