@@ -1,6 +1,11 @@
+import 'package:flash_meteo/modeles/pays.dart';
+import 'package:flash_meteo/modeles/utile/request_extension.dart';
 import 'package:flash_meteo/pages/page1.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rxdart/rxdart.dart';
+
+import '../modeles/loading.dart';
 
 
 class Home extends StatefulWidget {
@@ -11,14 +16,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String NomaAffiche2="";
+
   final TextEditingController _NomdeVilleControler = TextEditingController();
   String NomaAffiche= "?";
   void AfficheVille (){
     setState(() {
       NomaAffiche=_NomdeVilleControler.text;
-     RestCountries(NomaAffiche);
+      NomaAffiche2=RestCountries(NomaAffiche).toString();
     });
+    
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
              SizedBox(height: 20,),
-            Text("Voici la météo qu'il fait dans à", style: TextStyle(fontSize: 20),),
+            Text("Voici les informations de:", style: TextStyle(fontSize: 20),),
                SizedBox(height: 20,),
                  
                 Container(
@@ -48,7 +57,7 @@ class _HomeState extends State<Home> {
 
                   ),
                 ),
-               Text('$NomaAffiche', style: TextStyle(fontSize: 30),),
+               Text('$NomaAffiche2', style: TextStyle(fontSize: 30),),
             
           ],
         ),
@@ -65,21 +74,18 @@ class _HomeState extends State<Home> {
     ),
     );
   }
-   RestCountries (
-   String NomdePays
- ) async {
+
+  Stream<Loading> get loadingPaysStream =>
+      _loadingPaysSubject.stream;
+  final _loadingPaysSubject = BehaviorSubject<Loading>();
+
+  RestCountries (
+   String NomdePays)  {
+     RequestExtension<Pays> requestExtension= RequestExtension();
+     _loadingPaysSubject.add(Loading(loading: true,message: 'chargement en cours'));
+     
+
    
-   print('On est dans le rest countries');
-   print("AAAAAAAAAAAAAA");
-   print(NomdePays);
-   final response = await http.get(
-        Uri.parse('https://restcountries.com/v3.1/name/' + NomdePays),
-        //body: {
-         // "username": user.username,
-         // "password": user.password,
-      //  });
-   );
-   print(response.body);
    }
 }
 
