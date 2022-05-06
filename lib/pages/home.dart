@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flash_meteo/modeles/pays.dart';
 import 'package:flash_meteo/modeles/utile/request_extension.dart';
 import 'package:flash_meteo/pages/page1.dart';
@@ -83,9 +85,17 @@ class _HomeState extends State<Home> {
    String NomdePays)  {
      RequestExtension<Pays> requestExtension= RequestExtension();
      _loadingPaysSubject.add(Loading(loading: true,message: 'chargement en cours'));
+     Future< dynamic > response= requestExtension.get(NomdePays);
+     print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+     response.then((value){ 
+       print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+       Pays response1= value as Pays;
+       print ('response1');
+      });
+}
      
 
    
    }
-}
+   
 
