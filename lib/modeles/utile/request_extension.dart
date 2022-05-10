@@ -10,7 +10,7 @@ class RequestExtension<T> {
   static const String _urlEndpointSimple = 'https://restcountries.com/v3.1/name/';
 
   
-
+  
 
   Future<dynamic> get(String url) async {
     print(url);

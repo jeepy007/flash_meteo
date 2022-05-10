@@ -1,3 +1,4 @@
+import 'package:flash_meteo/pages/connexion.dart';
 import 'package:flash_meteo/pages/home.dart';
 import 'package:flash_meteo/pages/page1.dart';
 import 'package:flash_meteo/pages/splashscreen.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: page1(),
+      home: Connexion(),
     );
   }
 

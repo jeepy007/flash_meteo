@@ -48,6 +48,4 @@ class _page1State extends State<splashscreen> {
       ),
     );
   }
-
-  connexion() {}
 }
