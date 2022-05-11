@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:flash_meteo/modeles/pays.dart';
 import 'package:flash_meteo/modeles/utile/request_extension.dart';
 import 'package:flash_meteo/pages/page1.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 
@@ -23,9 +25,11 @@ class _HomeState extends State<Home> {
   final TextEditingController _NomdeVilleControler = TextEditingController();
   String NomaAffiche= "?";
   void AfficheVille (){
+    NomaAffiche=_NomdeVilleControler.text;
+     
     setState(() {
-      NomaAffiche=_NomdeVilleControler.text;
-      NomaAffiche2=RestCountries(NomaAffiche).toString();
+   RestCountries(NomaAffiche);
+     
     });
     
   }
@@ -86,12 +90,19 @@ class _HomeState extends State<Home> {
      RequestExtension<Pays> requestExtension= RequestExtension();
      _loadingPaysSubject.add(Loading(loading: true,message: 'chargement en cours'));
      Future< dynamic > response= requestExtension.get(NomdePays);
-     print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-     response.then((value){ 
+     
+     print(NomdePays);
+     print('%%%%%%%%%%%%%%%5555555555555555555%%%%%%%%%%%%%%%%%%%%%%%%');
+      Pays ? response1;
+      
+     response.then((value){
+
        print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-       Pays response1= value as Pays;
-       print ('response1');
+      response1= value as Pays;
+      print('########################################################################');
+       print(response1!.name!.official.toString());
       });
+      NomaAffiche2 = response1!.capital as String;
 }
      
 

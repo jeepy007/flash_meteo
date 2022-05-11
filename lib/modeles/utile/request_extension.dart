@@ -22,13 +22,13 @@ class RequestExtension<T> {
 
    );
    if (response.statusCode==200 || response.statusCode==201){
-     print(response.body);
-     print("************************************************");
+     
+     print("**********************555555556666**************************");
      switch (T){
-       case Pays: 
-       return Pays.fromJson(json.decode(response.body.toString())) as T;
-       //default: return DataResponse<T>.fromJson(json.decode(response.body));
-
+       case Pays:print((json.decode(response.body)[0])); 
+       print("0000000000000000000000000000");
+       return Pays.fromJson(json.decode(response.body)[0]) as T;
+       default: return Pays.fromJson(json.decode(response.body.toString())) as T;
      };
    };
 

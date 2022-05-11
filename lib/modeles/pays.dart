@@ -19,7 +19,6 @@ class Pays {
         this.name,      
         this.independent,
         this.status,      
-         
         this.capital,   
         this.languages,     
         this.latlng,
@@ -32,10 +31,8 @@ class Pays {
     Name? name; 
     bool? independent;
     String? status;   
-   
     List<String>? capital;
     Languages? languages;
-
     List<int>? latlng;
     int? population;
     List<String>? continents;
@@ -45,8 +42,7 @@ class Pays {
     factory Pays.fromJson(Map<String, dynamic> json) => Pays(
         name: Name.fromJson(json["name"]),      
         independent: json["independent"],
-        status: json["status"],     
-          
+        status: json["status"],             
         capital: List<String>.from(json["capital"].map((x) => x)),      
         languages: Languages.fromJson(json["languages"]),       
         latlng: List<int>.from(json["latlng"].map((x) => x)),      
@@ -58,23 +54,13 @@ class Pays {
 
     Map<String, dynamic> toJson() => {
         "name": name!.toJson(),
-       
         "independent": independent,
-        "status": status,
-        
-        
-       
-        "capital": List<dynamic>.from(capital!.map((x) => x)),
-        
-         "languages": languages!.toJson(),
-       
-        "latlng": List<dynamic>.from(latlng!.map((x) => x)),
-        
-        
-        "population": population,
-        
-        "continents": List<dynamic>.from(continents!.map((x) => x)),
-       
+        "status": status,      
+        "capital": List<dynamic>.from(capital!.map((x) => x)),       
+         "languages": languages!.toJson(),   
+        "latlng": List<dynamic>.from(latlng!.map((x) => x)),        
+        "population": population,       
+        "continents": List<dynamic>.from(continents!.map((x) => x)),      
         "capitalInfo": capitalInfo!.toJson(),
         "postalCode": postalCode!.toJson(),
     };
