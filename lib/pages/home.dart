@@ -90,6 +90,7 @@ class _HomeState extends State<Home> {
      RequestExtension<Pays> requestExtension= RequestExtension();
      _loadingPaysSubject.add(Loading(loading: true,message: 'chargement en cours'));
      Future< dynamic > response= requestExtension.get(NomdePays);
+    
      
      print(NomdePays);
      print('%%%%%%%%%%%%%%%5555555555555555555%%%%%%%%%%%%%%%%%%%%%%%%');
