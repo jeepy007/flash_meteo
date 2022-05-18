@@ -24,8 +24,9 @@ class _HomeState extends State<Home> {
 
   final TextEditingController _NomdeVilleControler = TextEditingController();
   String NomaAffiche= "?";
-  void AfficheVille (){
+  void AfficheVille () async{
     NomaAffiche=_NomdeVilleControler.text;
+    NomaAffiche2= await RestCountries(NomaAffiche);
      
     setState(() {
    RestCountries(NomaAffiche);
@@ -74,7 +75,7 @@ class _HomeState extends State<Home> {
           
         }),
         tooltip: 'Increment',
-        child: const Icon(Icons.home, color: Colors.red,
+        child: const Icon(Icons.search, color: Colors.red,
         ),
       
     ),
@@ -86,24 +87,33 @@ class _HomeState extends State<Home> {
   final _loadingPaysSubject = BehaviorSubject<Loading>();
 
   RestCountries (
-   String NomdePays)  {
+   String NomdePays) async {
      RequestExtension<Pays> requestExtension= RequestExtension();
      _loadingPaysSubject.add(Loading(loading: true,message: 'chargement en cours'));
-     Future< dynamic > response= requestExtension.get(NomdePays);
+     String retour='TTTTTTTTTTTTTTTTTT';
+     Pays response= await requestExtension.get(NomdePays);
+
+     //Future< dynamic > response= requestExtension.get(NomdePays);
     
      
      print(NomdePays);
      print('%%%%%%%%%%%%%%%5555555555555555555%%%%%%%%%%%%%%%%%%%%%%%%');
-      Pays ? response1;
-      
-     response.then((value){
+     print(response.capital!.first);
 
-       print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
-      response1= value as Pays;
-      print('########################################################################');
-       print(response1!.name!.official.toString());
-      });
-      NomaAffiche2 = response1!.capital as String;
+    //Pays ? response1;
+      
+     //response.then((value){
+
+    //   print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+     // response1= value as Pays;
+      //print('########################################################################');
+     //print(response1!.name!.official.toString());
+     // });
+     // NomaAffiche2 = response1!.capital as String;
+     print('222222222222222222222222222222222');
+     retour= "la capitale est : "+ (response.capital!.first)+ "  la population est : "+""+ (response.population).toString();
+     print(retour);
+     return retour;
 }
      
 

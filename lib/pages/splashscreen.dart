@@ -20,7 +20,7 @@ class _page1State extends State<splashscreen> {
     Timer(Duration(seconds:4),(){
       Navigator.of(context).pushReplacement
       (MaterialPageRoute(builder:(_)=>
-      Connexion(),
+      splashscreen(),
       ),
       );
     });
